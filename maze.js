@@ -54,11 +54,11 @@ function Maze() {
             return self.maze[x][y - 1].breadcrumb;
         }
 
-        function breakCrumbToTheLeft() {
+        function breadCrumbToTheLeft() {
             return self.maze[x - 1][y].breadcrumb;
         }
 
-        function breakCrumbToTheRight() {
+        function breadCrumbToTheRight() {
             return self.maze[x + 1][y].breadcrumb;
         }
 
@@ -95,10 +95,10 @@ function Maze() {
             if (isOpenAbove() && breadCrumbAbove() < breadcrumb) {
                 moveUp();
                 rememberBreadCrumb();
-            } else if (isOpenLeft() && breakCrumbToTheLeft() < breadcrumb) {
+            } else if (isOpenLeft() && breadCrumbToTheLeft() < breadcrumb) {
                 moveLeft();
                 rememberBreadCrumb();
-            } else if (isOpenRight() && breakCrumbToTheRight() < breadcrumb) {
+            } else if (isOpenRight() && breadCrumbToTheRight() < breadcrumb) {
                 moveRight();
                 rememberBreadCrumb();
             } else if (isOpenBelow() && breadCrumbBelow() < breadcrumb) {
