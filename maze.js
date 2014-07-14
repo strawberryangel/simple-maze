@@ -143,23 +143,26 @@ function Maze() {
 
             // Visit a random neighbor.
             var action = neighbors[getRandomInt(0, neighbors.length)];
-            if (action === "move up") {
+            var report = function (neighbors, action) {
                 if (self.debug) console.log("(", x, ", ", y, "):  unvisited neighbors at ", neighbors, ' choosing to ', action);
+            };
+            if (action === "move up") {
+                report(neighbors, action);
                 removeTopWall();
                 moveUp();
                 dropBreadCrumb();
             } else if (action === "move down") {
-                if (self.debug) console.log("(", x, ", ", y, "):  unvisited neighbors at ", neighbors, ' choosing to ', action);
+                report(neighbors, action);
                 removeBottomWall();
                 moveDown();
                 dropBreadCrumb();
             } else if (action === "move left") {
-                if (self.debug) console.log("(", x, ", ", y, "):  unvisited neighbors at ", neighbors, ' choosing to ', action);
+                report(neighbors, action);
                 removeLeftWall();
                 moveLeft();
                 dropBreadCrumb();
             } else if (action === "move right") {
-                if (self.debug) console.log("(", x, ", ", y, "):  unvisited neighbors at ", neighbors, ' choosing to ', action);
+                report(neighbors, action);
                 removeRightWall();
                 moveRight();
                 dropBreadCrumb();
@@ -256,10 +259,10 @@ function Maze() {
     }
 
     function hasUnvisitedNeighbor() {
-        if (!atTop() && !visitedAbove()) return true;
-        if (!atLeft() && !visitedLeft()) return true;
-        if (!atRight() && !visitedRight()) return true;
-        if (!atBottom() && !visitedBelow()) return true;
+        return (!atTop() && !visitedAbove()) ||
+            (!atLeft() && !visitedLeft()) ||
+            (!atRight() && !visitedRight()) ||
+            (!atBottom() && !visitedBelow());
     }
 
     function makeExit() {
